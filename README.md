@@ -50,6 +50,6 @@
 
 ## Run the bot
   
-node index.js
+    node index.js
 
 ##
