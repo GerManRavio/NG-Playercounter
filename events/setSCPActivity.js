@@ -1,6 +1,6 @@
 require('dotenv').config();
 const axios = require('axios').default;
-const { Client } = require('discord.js');
+const { Events, Client} = require('discord.js');
 
 const SERVER_ID = process.env.SERVER_ID;
 const SCPSL_KEY = process.env.SCPSL_KEY;
