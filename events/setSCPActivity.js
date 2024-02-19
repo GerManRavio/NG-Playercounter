@@ -12,19 +12,19 @@ async function fetchServerInfo() {
     return response.data;
   } catch (error) {
     console.error("API error:", error);
-    return null;
+    return [];
   }
 }
 
 async function setActivity(client) {
   try {
     const serverInfo = await fetchServerInfo();
-    if (serverInfo && serverInfo.online) {
+    if ((serverInfo != null) && serverInfo.online) {
       const playercount = serverInfo.players;
       client.user.setPresence({
         activities: [
           {
-            name: `SCP:SL: ${playercount} | IP: ${serverInfo.ip}`,
+            name: `SCP:SL: ${playercount} | IP: ${serverInfo.ip}:${serverInfo.port}`,
             type: 4,
           },
         ],
