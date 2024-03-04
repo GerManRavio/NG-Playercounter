@@ -9,7 +9,7 @@ async function setActivity(client) {
         activities: [
           {
             name: `SCP:SL: ${playercount} | IP: ${serverInfo.ip}:${serverInfo.port}`,
-            type: "PLAYING",
+            type: 4,
           },
         ],
         status: "online",
