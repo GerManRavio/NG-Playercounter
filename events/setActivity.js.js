@@ -1,21 +1,26 @@
-const { fetchServerInfoWithCurl } = require('./fetchServerInfo.js');
+const { fetchServerInfoWithAxios, fetchServerInfoCurl, getApiUrlKR, getApiUrlGAME} = require('./fetchServerInfo.js');
 
 async function setActivity(client) {
   try {
-    const serverInfo = await fetchServerInfoWithCurl();
-    if (serverInfo && serverInfo.online) {
-      const playercount = serverInfo.players;
+    const serverInfo_KR = await fetchServerInfoCurl();
+    const serverInfo_GAME = await fetchServerInfoWithAxios();
+    console.log("------------------------------------------------------------------------------------------------------");
+    console.log("URL KR: " + getApiUrlKR());
+    console.log("URL GAME: " + getApiUrlGAME());
+    if (serverInfo_KR && serverInfo_KR.online) {
+      const playercount = serverInfo_GAME.Servers[1].Players;
+      const serverport = serverInfo_GAME.Servers[1].Port;
       client.user.setPresence({
         activities: [
           {
-            name: `SCP:SL: ${playercount} | IP: ${serverInfo.ip}:${serverInfo.port}`,
+            name: `SCP:SL: ${playercount} | IP: ${serverInfo_KR.ip}:${serverport}`,
             type: 4,
           },
         ],
         status: "online",
       });
       console.log("Updated Status to: " + playercount);
-      await sleep(60000);
+      await sleep(15000);
       await setActivity(client);
     }
   } catch (error) {
