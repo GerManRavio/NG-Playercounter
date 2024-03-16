@@ -20,7 +20,7 @@ async function setActivity(client) {
         status: "online",
       });
       console.log("Updated Status to: " + playercount);
-      await sleep(15000);
+      await sleep(30000);
       await setActivity(client);
     }
   } catch (error) {
