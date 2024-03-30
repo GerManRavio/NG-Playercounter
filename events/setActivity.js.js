@@ -25,6 +25,8 @@ async function setActivity(client) {
     }
   } catch (error) {
     console.error("Failed to set activity:", error);
+    await sleep(30000);
+    await setActivity(client);
   }
 }
 

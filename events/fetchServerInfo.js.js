@@ -21,7 +21,7 @@ async function fetchServerInfoCurl() {
     return data;
   } catch (error) {
     console.error("Curl error:", error);
-    throw error;
+    return [];
   }
 }
 
@@ -32,14 +32,14 @@ async function fetchServerInfoWithAxios() {
     if (data && typeof data === 'object') {
       const jsonData = JSON.stringify(data);
       const cleanedJsonData = jsonData.replace(/\\\//g, '/');
-      const data_1 = JSON.parse(cleanedJsonData);
-      return data_1;
+      const result = JSON.parse(cleanedJsonData);
+      return result;
     } else {
       console.error('Invalid response data from the API.');
     }
   } catch (error) {
     console.error("Axios error:", error.message);
-    throw error;
+    return [];
   }
 }
 
