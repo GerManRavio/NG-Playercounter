@@ -7,12 +7,14 @@ async function setActivity(client) {
     console.log("------------------------------------------------------------------------------------------------------");
     console.log("URL KR: " + getApiUrlKR());
     console.log("URL GAME: " + getApiUrlGAME());
-    if (serverInfo_KR && serverInfo_KR.online) {
-      const playercount = serverInfo_GAME.Servers[1].Players;
-      const serverport = serverInfo_GAME.Servers[1].Port;
-      client.user.setPresence({
-        activities: [
-          {
+    if ((serverInfo_KR && serverInfo_KR.online)) {
+        const playercount = serverInfo_GAME.Servers[0].Players;
+        console.log("Playercount: " + playercount);
+        const serverport = serverInfo_GAME.Servers[0].Port;
+        console.log("Serverport: " + serverport);
+    client.user.setPresence({
+      activities: [
+        {
             name: `SCP:SL: ${playercount} | IP: ${serverInfo_KR.ip}:${serverport}`,
             type: 4,
           },
@@ -25,6 +27,8 @@ async function setActivity(client) {
     }
   } catch (error) {
     console.error("Failed to set activity:", error);
+    await sleep(30000);
+    await setActivity(client);
   }
 }
 

@@ -1,6 +1,6 @@
 require("dotenv").config();
-const util = require('util');
-const exec = util.promisify(require('child_process').exec);
+const util = require("util");
+const exec = util.promisify(require("child_process").exec);
 const axios = require("axios");
 
 const ACCOUNT_ID = process.env.ACCOUNT_ID;
@@ -21,7 +21,7 @@ async function fetchServerInfoCurl() {
     return data;
   } catch (error) {
     console.error("Curl error:", error);
-    return [];
+    throw error;
   }
 }
 
@@ -29,17 +29,17 @@ async function fetchServerInfoWithAxios() {
   try {
     const response = await axios.get(API_URL_GAME);
     const data = response.data;
-    if (data && typeof data === 'object') {
+    if (data && typeof data === "object") {
       const jsonData = JSON.stringify(data);
-      const cleanedJsonData = jsonData.replace(/\\\//g, '/');
+      const cleanedJsonData = jsonData.replace(/\\\//g, "/");
       const result = JSON.parse(cleanedJsonData);
       return result;
     } else {
-      console.error('Invalid response data from the API.');
+      console.error("Invalid response data from the API.");
     }
   } catch (error) {
     console.error("Axios error:", error.message);
-    return [];
+    throw error;
   }
 }
 
@@ -51,4 +51,9 @@ function getApiUrlGAME() {
   return API_URL_GAME;
 }
 
-module.exports = { fetchServerInfoWithAxios, fetchServerInfoCurl, getApiUrlKR, getApiUrlGAME};
+module.exports = {
+  fetchServerInfoWithAxios,
+  fetchServerInfoCurl,
+  getApiUrlKR,
+  getApiUrlGAME,
+};
