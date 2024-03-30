@@ -8,14 +8,16 @@ async function setActivity(client) {
     console.log("URL KR: " + getApiUrlKR());
     console.log("URL GAME: " + getApiUrlGAME());
     if ((serverInfo_KR && serverInfo_KR.online)) {
-        const playercount = serverInfo_GAME.Servers[0].Players;
+        const playerCount = serverInfo_GAME.Servers[0].Players;
         console.log("Playercount: " + playercount);
-        const serverport = serverInfo_GAME.Servers[0].Port;
+        const serverPort = serverInfo_GAME.Servers[0].Port;
         console.log("Serverport: " + serverport);
+        const serverIp = serverInfo_KR.ip;
+        console.log("ServerIP: " + serverport);
     client.user.setPresence({
       activities: [
         {
-            name: `SCP:SL: ${playercount} | IP: ${serverInfo_KR.ip}:${serverport}`,
+            name: `SCP:SL: ${playerCount} | IP: ${serverIp}:${serverPort}`,
             type: 4,
           },
         ],
